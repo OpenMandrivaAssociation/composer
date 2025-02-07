@@ -1,0 +1,45 @@
+diff -up ./bin/composer.rpm ./bin/composer
+--- ./bin/composer.rpm	2024-10-03 07:10:57.000000000 +0200
++++ ./bin/composer	2024-10-03 07:11:10.751092365 +0200
+@@ -16,7 +16,7 @@ if (PHP_VERSION_ID < 70205) {
+ }
+ 
+ setlocale(LC_ALL, 'C');
+-require __DIR__.'/../src/bootstrap.php';
++require '/usr/share/composer/src/bootstrap.php';
+ 
+ use Composer\Console\Application;
+ use Composer\XdebugHandler\XdebugHandler;
+diff -up ./src/Composer/InstalledVersions.php.rpm ./src/Composer/InstalledVersions.php
+--- ./src/Composer/InstalledVersions.php.rpm	2024-10-03 07:10:57.000000000 +0200
++++ ./src/Composer/InstalledVersions.php	2024-10-03 07:11:10.752092401 +0200
+@@ -266,7 +266,7 @@ class InstalledVersions
+         if (null === self::$installed) {
+             // only require the installed.php file if this file is loaded from its dumped location,
+             // and not from its source location in the composer/composer package, see https://github.com/composer/composer/issues/9937
+-            if (substr(__DIR__, -8, 1) !== 'C') {
++            if (substr(__DIR__, -8, 1) !== 'C' && is_file(__DIR__ . '/installed.php')) {
+                 self::$installed = include __DIR__ . '/installed.php';
+             } else {
+                 self::$installed = array();
+@@ -341,7 +341,7 @@ class InstalledVersions
+         if (null === self::$installed) {
+             // only require the installed.php file if this file is loaded from its dumped location,
+             // and not from its source location in the composer/composer package, see https://github.com/composer/composer/issues/9937
+-            if (substr(__DIR__, -8, 1) !== 'C') {
++            if (substr(__DIR__, -8, 1) !== 'C' && is_file(__DIR__ . '/installed.php')) {
+                 /** @var array{root: array{name: string, pretty_version: string, version: string, reference: string|null, type: string, install_path: string, aliases: string[], dev: bool}, versions: array<string, array{pretty_version?: string, version?: string, reference?: string|null, type?: string, install_path?: string, aliases?: string[], dev_requirement: bool, replaced?: string[], provided?: string[]}>} $required */
+                 $required = require __DIR__ . '/installed.php';
+                 self::$installed = $required;
+diff -up ./vendor/composer/ca-bundle/src/CaBundle.php.rpm ./vendor/composer/ca-bundle/src/CaBundle.php
+--- ./vendor/composer/ca-bundle/src/CaBundle.php.rpm	2024-09-25 09:49:53.000000000 +0200
++++ ./vendor/composer/ca-bundle/src/CaBundle.php	2024-10-03 07:11:10.752092401 +0200
+@@ -125,7 +125,7 @@ class CaBundle
+      */
+     public static function getBundledCaBundlePath()
+     {
+-        $caBundleFile = __DIR__.'/../res/cacert.pem';
++        $caBundleFile = '/etc/pki/tls/certs/ca-bundle.crt'; // System CA, always
+ 
+         // cURL does not understand 'phar://' paths
+         // see https://github.com/composer/ca-bundle/issues/10

@@ -1,0 +1,14 @@
+diff -up ./src/Composer/Factory.php.noxdg ./src/Composer/Factory.php
+--- ./src/Composer/Factory.php.noxdg	2024-04-20 12:34:54.442117723 +0200
++++ ./src/Composer/Factory.php	2024-04-20 12:35:39.497640757 +0200
+@@ -702,6 +702,10 @@ class Factory
+ 
+     private static function useXdg(): bool
+     {
++        // As XDG is very partially implemented
++        // resulting in command/code in ~/.config
++        return false;
++
+         foreach (array_keys($_SERVER) as $key) {
+             if (strpos((string) $key, 'XDG_') === 0) {
+                 return true;
