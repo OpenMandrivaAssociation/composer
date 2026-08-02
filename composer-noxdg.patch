@@ -1,7 +1,6 @@
-diff -up ./src/Composer/Factory.php.noxdg ./src/Composer/Factory.php
---- ./src/Composer/Factory.php.noxdg	2024-04-20 12:34:54.442117723 +0200
-+++ ./src/Composer/Factory.php	2024-04-20 12:35:39.497640757 +0200
-@@ -702,6 +702,10 @@ class Factory
+--- ./src/Composer/Factory.php.noxdg
++++ ./src/Composer/Factory.php
+@@ -704,6 +704,10 @@ class Factory
  
      private static function useXdg(): bool
      {
