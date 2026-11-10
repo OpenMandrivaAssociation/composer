@@ -1,7 +1,7 @@
-%global gh_commit    8d4439f572a97670a9edc039eb3b093cc976b4bc
+%global gh_commit    12c820dbc3f030954b1d09f5884fcf1e9d29d6cb
 %global gh_short     %(c=%{gh_commit}; echo ${c:0:7})
 %global gh_branch    2.0-dev
-%global api_version  2.9.0
+%global api_version  2.11.0
 %global run_version  2.2.2
 
 %global _phpunit       %{_bindir}/phpunit9
@@ -9,7 +9,7 @@
 %global bashcomproot   %(dirname %{bashcompdir} 2>/dev/null)
 
 Name:           composer
-Version:        2.10.2
+Version:        2.11.2
 Release:        1
 Summary:        Dependency Manager for PHP
 License:        MIT
